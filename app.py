@@ -122,11 +122,25 @@ def predict_regression():
 
         # Make a prediction using the loaded and now fitted model
         prediction = loaded_model.predict(input_data_encoded)[0]
+        
+        # Round the prediction to the nearest whole number
+        rounded_prediction = round(prediction)
 
         # Convert the prediction to positive
-        prediction = abs(prediction)
+        rounded_prediction = abs(rounded_prediction)
+        
+        # Create a mapping for the price ranges
+        price_range_mapping = {
+            0: '< Php 1000',
+            1: 'Php 1000 - Php 5000',
+            2: 'Php 5000 - Php 15000',
+            3: '> Php 15000'
+        }
 
-        return render_template('priceresult.html', price=prediction)
+        # Get the equivalent price range for the rounded prediction
+        equivalent_prediction = price_range_mapping.get(rounded_prediction, 'Unknown')
+
+        return render_template('priceresult.html', price=equivalent_prediction)
 
 
 if __name__ == '__main__':
