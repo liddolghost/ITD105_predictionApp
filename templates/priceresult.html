@@ -4,9 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Price Prediction Result</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .result-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        p {
+            color: #555;
+            text-align: center;
+        }
+
+        .predicted-price {
+            color: blue; /* Change the color to your preference */
+            font-weight: bold;
+        }
+
+        .back-to-price {
+            cursor: pointer;
+            color: blue; /* Change the color to your preference */
+            text-decoration: underline; /* Optional: Add underline for better visual indication */
+        }
+    </style>
 </head>
 <body>
-    <h1>Price Prediction Result</h1>
-    <p>The predicted price is: {{ price }}</p>
+    <div class="result-container">
+        <h1>Price Prediction Result</h1>
+        <p>The predicted price is:</p>
+        <p><span class="predicted-price">{{ price }}</span></p>
+        <p class="back-to-price" onclick="redirectToPrice()">Got it</p>
+    
+        <script>
+            function redirectToPrice() {
+                // Use Flask's url_for function to get the URL for the 'price' route
+                var priceUrl = '{{ url_for('price') }}';
+                
+                // Redirect to the price route
+                window.location.href = priceUrl;
+            }
+        </script>
+    </div>
 </body>
 </html>
